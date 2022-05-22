@@ -17,4 +17,9 @@ export const authApi = {
   login(email, password) {
     return this.authenticate(`signInWithPassword`, email, password);
   },
+  getDatabaseMessage(idToken) {
+    return axios.get(
+      `https://react-native-course-backend-default-rtdb.europe-west1.firebasedatabase.app/message.json?auth=${idToken}`
+    );
+  },
 };
