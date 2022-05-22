@@ -7,6 +7,7 @@ import SignupScreen from './screens/SignupScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import { Colors } from './constants/styles';
 import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const Stack = createNativeStackNavigator();
 

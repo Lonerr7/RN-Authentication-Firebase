@@ -1,26 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
 import AuthContent from '../components/Auth/AuthContent';
-import { useState } from 'react';
 import LoadingOverlay from '../components/ui/LoadingOverlay';
-import { authApi } from '../api/api';
-import { Alert } from 'react-native';
+import { registerOrLogInThunk } from '../redux/userSlice';
 
 function LoginScreen() {
-  const [isFetching, setIsFetching] = useState(false);
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.user.isFetching);
 
-  const logInHandler = async ({ email, password }) => {
-    setIsFetching(true);
-    try {
-      const response = await authApi.login(email, password);
-      console.log(`RESPONSE DATA: `, response.data);
-    } catch (error) {
-      Alert.alert(
-        `An error occured!`,
-        `Something went wrond with authentication. Check your input data or try again later!`,
-        [{ text: 'Ok', style: 'default' }]
-      );
-    }
-
-    setIsFetching(false);
+  const logInHandler = async (email, password) => {
+    dispatch(
+      registerOrLogInThunk({
+        mode: 'logIn',
+        email,
+        password,
+      })
+    );
   };
 
   if (isFetching) {
