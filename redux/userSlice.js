@@ -4,6 +4,7 @@ import { alertFunction } from '../helpers/helpers';
 
 const initialState = {
   token: '',
+  isAuthenticated: false,
   isFetching: false,
   isAuthenticated: false,
 };
@@ -23,7 +24,7 @@ const userSlice = createSlice({
       .addCase(registerOrLogInThunk.fulfilled, (state, action) => {
         state.isFetching = false;
         state.token = action.payload.data.idToken;
-        console.log(state.token);
+        state.isAuthenticated = true;
       });
   },
 });
