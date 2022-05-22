@@ -13,8 +13,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    authenticate: () => {},
-    logOut: () => {},
+    logOut: (state) => {
+      state.token = '';
+      state.isAuthenticated = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,5 +52,5 @@ export const registerOrLogInThunk = createAsyncThunk(
   }
 );
 
-export const { authenticate, logOut } = userSlice.actions;
+export const { logOut } = userSlice.actions;
 export default userSlice.reducer;
